@@ -1,8 +1,21 @@
+import Image from "next/image";
 
 interface country {
     name: {
         common: string;
-    }
+    };
+
+    translations: {
+        por: {
+            common: string;
+        };
+    };
+
+    flags: {
+        svg: string;
+        alt: string;
+    };
+    
 }
 
 async function getContries(): Promise<country[]> {
@@ -14,8 +27,15 @@ export default async function Home() {
     const countries = await getContries();
 
     return (
-        <section className="container flex  w-full">
-            {countries.map((country) => ( <h1 key={country.name.common}>{country.name.common}</h1> ))}
+        <section className="grid grid-cols-5 w-full container gap-2 mt-16">
+            {countries.map((country) => (
+                <article key={country.name.common} className="h-64 min-w-full bg-white border-2 rounded-xl hover:border-indigo-200 transition-all hover:shadow-xl">
+                    <div className="relative w-full h-40 p-2 overflow-hidden rounded-lg">
+                        <Image src={country.flags.svg} alt={country.flags.alt} fill className="object-cover"/>
+                    </div>
+                    <h1 className="font-bold text-xl text-center mt-1">{country.translations.por.common}</h1>
+                </article>
+            ))}
         </section>
     );
 }
