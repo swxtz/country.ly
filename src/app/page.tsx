@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface country {
     name: {
@@ -15,7 +16,6 @@ interface country {
         svg: string;
         alt: string;
     };
-    
 }
 
 async function getContries(): Promise<country[]> {
@@ -29,12 +29,24 @@ export default async function Home() {
     return (
         <section className="grid grid-cols-5 w-full container gap-2 mt-16">
             {countries.map((country) => (
-                <article key={country.name.common} className="h-64 min-w-full bg-white border-2 rounded-xl hover:border-indigo-200 transition-all hover:shadow-xl">
-                    <div className="relative w-full h-40 p-2 overflow-hidden rounded-lg">
-                        <Image src={country.flags.svg} alt={country.flags.alt} fill className="object-cover"/>
-                    </div>
-                    <h1 className="font-bold text-xl text-center mt-1">{country.translations.por.common}</h1>
-                </article>
+                <Link
+                    href={`/pais/${country.name.common}`}
+                    key={country.name.common}
+                >
+                    <article className="h-64 min-w-full bg-white border-2 rounded-xl hover:border-indigo-200 transition-all hover:shadow-xl">
+                        <div className="relative w-full h-40 p-2 overflow-hidden rounded-lg">
+                            <Image
+                                src={country.flags.svg}
+                                alt={country.flags.alt}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                        <h1 className="font-bold text-xl text-center mt-1">
+                            {country.translations.por.common}
+                        </h1>
+                    </article>
+                </Link>
             ))}
         </section>
     );
