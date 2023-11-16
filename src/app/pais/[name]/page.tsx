@@ -18,6 +18,8 @@ async function getCountryByName(name: string): Promise<Country> {
 export default async function CountryPage({ params: { name } }: CountryParams) {
     const country = await getCountryByName(name);
 
+    const formatter = Intl.NumberFormat("en", { notation: "compact" });
+
     return (
         <section className="flex flex-col container">
             <h1 className="text-5xl font-bold text-gray-800 my-16 text-center">
@@ -36,7 +38,7 @@ export default async function CountryPage({ params: { name } }: CountryParams) {
                         {country.subregion}
                     </h2>
                     <h2 className=" text-xl text-gray-800 mb-3">
-                        <b>👨‍👩‍👧‍👦 População:</b> {country.population}
+                        <b>👨‍👩‍👧‍👦 População:</b> {formatter.format(country.population)}
                     </h2>
                     <h2 className=" text-xl text-gray-800 mb-3">
                         <b>🗣️ Línguas faladas:</b>
