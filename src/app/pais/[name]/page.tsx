@@ -1,5 +1,6 @@
 import { Country } from "@/app/page";
 import { MoveLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface CountryParams {
@@ -53,6 +54,9 @@ export default async function CountryPage({ params: { name } }: CountryParams) {
                         ))}
                     </h2>
                 </section>
+                <div className="relative h-auto w-96 shadow-xl rounded-xl overflow-hidden">
+                    <Image src={country.flags.svg} alt={country.flags.alt} fill className="object-cover"/>
+                </div>
             </article>
         </section>
     );
