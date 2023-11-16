@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface country {
+export interface Country {
     name: {
         common: string;
     };
@@ -16,9 +16,19 @@ interface country {
         svg: string;
         alt: string;
     };
+
+    capital: string;
+    region: string;
+    subregion: string;
+    population: number;
+    languages: {
+        [key: string]: string;
+    };
+
+
 }
 
-async function getContries(): Promise<country[]> {
+async function getContries(): Promise<Country[]> {
     const response = await fetch("https://restcountries.com/v3.1/all");
     return response.json();
 }
