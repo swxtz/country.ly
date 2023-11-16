@@ -25,7 +25,8 @@ export interface Country {
         [key: string]: string;
     };
 
-
+    borders?: string[];
+    cca3: string;
 }
 
 async function getContries(): Promise<Country[]> {
